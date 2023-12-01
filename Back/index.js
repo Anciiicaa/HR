@@ -2,18 +2,18 @@ const sql = require('mssql');
 
 // Postavite informacije o konekciji
 const config = {
-  server: 'DESKTOP-M7QDFHBMSSQLSERVER01',
+  server: 'DESKTOP-M7QDFHB\MSSQLSERVER01',
   database: 'HR',
+  user: 'sqluser',
+  password: 'database123', // Ovo je samo primer, obavezno koristite bezbedan način čuvanja šifre u stvarnom projektu
   options: {
     encrypt: true,
     trustServerCertificate: true,
     authentication: {
-      type: 'Windows',
+      type: 'default',
     },
   },
 };
-
-  
 
 // Napravite konekciju
 sql.connect(config, (err) => {
