@@ -2,17 +2,17 @@ const sql = require('mssql');
 
 // Postavite informacije o konekciji
 const config = {
-    server: '127.0.0.1\\MSSQLSERVER01',
-    database: 'HR',
-    options: {
-      encrypt: true,
-      trustServerCertificate: true,
-      authentication: {
-        type: 'Windows',
-      },
+  server: 'DESKTOP-M7QDFHBMSSQLSERVER01',
+  database: 'HR',
+  options: {
+    encrypt: true,
+    trustServerCertificate: true,
+    authentication: {
+      type: 'Windows',
     },
-  };
-  
+  },
+};
+
   
 
 // Napravite konekciju
