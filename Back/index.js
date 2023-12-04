@@ -1,11 +1,19 @@
+const express = require('express');
+const bodyParser = require('body-parser');
 const sql = require('mssql');
+
+const app = express();
+const port = 3000;
+
+// Middleware za analizu JSON podataka iz zahteva
+app.use(bodyParser.json());
 
 // Postavite informacije o konekciji
 const config = {
-  server: 'SERVERERP\ERPSYSTEM',
-  database: 'QPS',
-  user: 'Anica',
-  password: 'database123', // Ovo je samo primer, obavezno koristite bezbedan način čuvanja šifre u stvarnom projektu
+  server: 'DESKTOP-M7QDFHB\\MSSQLSERVER01',
+  database: 'HR',
+  user: 'sqluser',
+  password: 'database123',
   options: {
     encrypt: true,
     trustServerCertificate: true,
@@ -15,24 +23,34 @@ const config = {
   },
 };
 
-// Napravite konekciju
-sql.connect(config, (err) => {
-  if (err) {
-    console.error('Greška pri povezivanju:', err);
-    return;
+// Kreirajte bazen konekcija
+const pool = new sql.ConnectionPool(config);
+const poolConnect = pool.connect();
+
+// Endpoint za dohvatanje svih korisnika
+app.get('/users', async (req, res) => {
+  await poolConnect; // Čekajte dok se bazen konekcija ne uspostavi
+
+  try {
+    const request = pool.request();
+
+    // Izvršavanje upita za dohvatanje svih korisnika
+    const result = await request.query('SELECT * FROM users');
+
+    // Slanje rezultata kao odgovor
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Greška pri izvršavanju upita:', err);
+    res.status(500).json({ error: 'Greška pri izvršavanju upita' });
   }
+});
 
-  // Ovde možete izvršiti SQL upite
-  // Na primer:
-  const request = new sql.Request();
-  request.query('SELECT * FROM GP12Stanica', (err, result) => {
-    if (err) {
-      console.error('Greška pri izvršavanju upita:', err);
-      sql.close();
-      return;
-    }
+// Osnovna ruta za dobrodošlicu
+app.get('/', (req, res) => {
+  res.send('Dobrodošli na server!');
+});
 
-    console.log('Rezultat upita:', result.recordset);
-    sql.close();
-  });
+// Startujte server
+app.listen(port, () => {
+  console.log(`Server je pokrenut na http://localhost:${port}`);
 });
