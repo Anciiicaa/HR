@@ -2,9 +2,9 @@ const sql = require('mssql');
 
 // Postavite informacije o konekciji
 const config = {
-  server: 'DESKTOP-M7QDFHB\MSSQLSERVER01',
-  database: 'HR',
-  user: 'sqluser',
+  server: 'SERVERERP\ERPSYSTEM',
+  database: 'QPS',
+  user: 'Anica',
   password: 'database123', // Ovo je samo primer, obavezno koristite bezbedan način čuvanja šifre u stvarnom projektu
   options: {
     encrypt: true,
@@ -25,7 +25,7 @@ sql.connect(config, (err) => {
   // Ovde možete izvršiti SQL upite
   // Na primer:
   const request = new sql.Request();
-  request.query('SELECT * FROM Employee', (err, result) => {
+  request.query('SELECT * FROM GP12Stanica', (err, result) => {
     if (err) {
       console.error('Greška pri izvršavanju upita:', err);
       sql.close();
