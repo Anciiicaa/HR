@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <title>Connect to sqlserver</title>
+</head>
+<body>
+
+<center>
+<h1>How to conect sqlserver and display data</h1>
+<h2>Django veb</h2>
+<hr>
+<table border = "1">
+<tr>
+    <th>Employe id</th>
+    <th>Employe name</th>
+    <th>Employe position</th>
+    <th>Employe mail</th>
+</tr>
+{% for datadisplay in sqlconnect%}
+<tr>
+    <th>{{datadisplay.ID}}</th>
+    <th>{{datadisplay.Ime}}</th>
+    <th>{{datadisplay.Pozicija}}</th>
+    <th>{{datadisplay.Email}}</th>
+
+</tr>
+{% endfor %}
+</table>
+</center>
+</body>
+</html>
