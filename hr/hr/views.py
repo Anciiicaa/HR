@@ -28,4 +28,5 @@ class SqlConnectListAPIView(viewsets.ModelViewSet):
         result = cursor.fetchall()
         serializer = SqlConnectSerializer(result, many=True)
         return Response(serializer.data)
+    
 
