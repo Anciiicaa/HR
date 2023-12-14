@@ -35,7 +35,7 @@ app.get('/users', async (req, res) => {
     const request = pool.request();
 
     // Izvršavanje upita za dohvatanje svih korisnika
-    const result = await request.query('SELECT * FROM users');
+    const result = await request.query('SELECT * FROM Employee');
 
     // Slanje rezultata kao odgovor
     res.json(result.recordset);
