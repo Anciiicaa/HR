@@ -1,6 +1,6 @@
 const sql = require('mssql');
 
-const conn_config = {
+/*const conn_config = {
   server: 'DESKTOP-JUV4PVS\\SQLEXPRESS',
   database: 'HR',
   user: 'jevrem',
@@ -9,7 +9,18 @@ const conn_config = {
     encrypt: true,
     trustServerCertificate: true
   },
+};*/
+const conn_config = {
+  server: 'DESKTOP-M7QDFHB\\MSSQLSERVER01',
+  database: 'HR',
+  user: 'sqluser',
+  password: 'database123',
+  options: {
+    encrypt: true,
+    trustServerCertificate: true
+  },
 };
+
 
 const config = {
     port:3000,
